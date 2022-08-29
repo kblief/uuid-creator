@@ -387,7 +387,7 @@ public final class UuidUtil {
 	 * Check the UUID version.
 	 * 
 	 * @param uuid    a UUID
-	 * @param variant a version
+	 * @param version a version
 	 * @return true if the the the version is correct
 	 * @exception NullPointerException if null
 	 */

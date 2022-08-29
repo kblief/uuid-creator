@@ -3,7 +3,11 @@ package com.github.f4b6a3.uuid.util;
 import static com.github.f4b6a3.uuid.util.UuidUtil.*;
 import static org.junit.Assert.*;
 
+import java.nio.ByteBuffer;
+import java.nio.LongBuffer;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -24,6 +28,42 @@ public class UuidUtilTest {
 	private static final long DCE_TIMESTAMP_MASK = 0xffffffff00000000L;
 	private static final long CLOCK_SEQUENCE_MASK = 0x0000000000003fffL;
 	private static final long NODE_IDENTIFIER_MASK = 0x0000ffffffffffffL;
+
+	@Test
+	public void shouldBlah() throws Exception {
+		String input = "merril00";
+
+		byte[] bytes = input.getBytes();
+		LongBuffer tmpBuf = ByteBuffer.wrap(bytes).asLongBuffer();
+
+		long[] lArr = new long[tmpBuf.remaining()];
+		for (int i = 0; i < lArr.length; i++)
+			lArr[i] = tmpBuf.get();
+
+		System.out.println(Arrays.toString(lArr));
+
+		UUID uuid = new UUID(lArr[0], 1L);
+		System.out.println("UUID: " + uuid);
+
+
+// store longs...
+
+// ...load longs
+		long[] longs = lArr;
+		byte[] inputBytes = new byte[longs.length * 8];
+		ByteBuffer bbuf = ByteBuffer.wrap(inputBytes);
+		for (long l : longs)
+			bbuf.putLong(l);
+		System.out.println(new String(inputBytes));
+
+
+	}
+
+	@Test
+	public void should() throws Exception {
+
+
+	}
 
 	@Test
 	public void testCopy() {
